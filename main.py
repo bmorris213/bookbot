@@ -3,11 +3,14 @@ def main():
     book_report(book_path)
 
 def book_report(book_path):
+    print (f"--- Begin report of {book_path} ---")
     text = get_book_text(book_path)
     num_words = get_num_words(text)
     letter_numbers = get_letter_counts(text)
-    
-
+    print (f"{num_words} words found in the document.")
+    for letter in letter_numbers:
+        print (f"The '{letter}' character was found {letter_numbers[letter]} times.")
+    print ("--- End report ---")
 
 
 def get_letter_counts(text):
@@ -19,7 +22,7 @@ def get_letter_counts(text):
                 letter_counts[letter] += 1
             else:
                 letter_counts[letter] = 1
-    return letter_counts
+    return dict(sorted(letter_counts.items(), key=lambda x: x[1], reverse=True))
 
 def get_num_words(text):
     words = text.split()
